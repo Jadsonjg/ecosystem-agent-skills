@@ -11,7 +11,15 @@
       "version": "1.1.0",
       "native_spec": "skills/delegation-context-skill/SKILL.md",
       "compatibility_export": "skills/delegation-context-skill/prompt-mestre.md",
-      "chatgpt_url": "https://chatgpt.com/skills?skill_id=6acbd243c8088191b2e61b170ec6779c"
+      "chatgpt_url": "https://chatgpt.com/skills?skill_id=6acbd243c8088191b2e61b170ec6779c",
+      "visual_identity": {
+        "icon_status": "pilot",
+        "existing_interface_icon": "skills/delegation-context-skill/assets/icon.svg",
+        "icon": "skills/delegation-context-skill/assets/identity/icone.svg",
+        "icon_negative": "skills/delegation-context-skill/assets/identity/icone-negativo.svg",
+        "icon_monochrome": "skills/delegation-context-skill/assets/identity/icone-monocromatico.svg",
+        "visual_guide_config": "docs/guias-visuais/conteudo/delegation-context-skill.json"
+      }
     },
     {
       "name": "agentic-workflow-governance",
@@ -20,7 +28,12 @@
       "compatible_architecture": "Arquitetura de Trabalho Agentiva 2.0",
       "native_spec": "skills/agentic-workflow-governance/SKILL.md",
       "canonical_source": "skills/agentic-workflow-governance/references/especificacao-canonica.md",
-      "chatgpt_url": "https://chatgpt.com/skills?skill_id=6acbe3f484b48191a13bc6797c8b6bf1"
+      "chatgpt_url": "https://chatgpt.com/skills?skill_id=6acbe3f484b48191a13bc6797c8b6bf1",
+      "visual_identity": {
+        "icon_status": "pending_approval",
+        "existing_interface_icon": "skills/agentic-workflow-governance/assets/icon.svg",
+        "visual_guide_config": "docs/guias-visuais/conteudo/agentic-workflow-governance.json"
+      }
     },
     {
       "name": "nivel-de-criticidade",
@@ -35,7 +48,12 @@
       "canonical_source": "skills/nivel-de-criticidade/references/especificacao-canonica.md",
       "validation_report": "tests/nivel-de-criticidade/v1.1.0.md",
       "native_status": "installed_verified",
-      "chatgpt_url": "https://chatgpt.com/skills?skill_id=6ad15379a0888191a8ff569f84eed566"
+      "chatgpt_url": "https://chatgpt.com/skills?skill_id=6ad15379a0888191a8ff569f84eed566",
+      "visual_identity": {
+        "icon_status": "pending_approval",
+        "existing_interface_icon": "skills/nivel-de-criticidade/assets/icon.svg",
+        "visual_guide_config": "docs/guias-visuais/conteudo/nivel-de-criticidade.json"
+      }
     }
   ]
 }

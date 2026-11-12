@@ -7,10 +7,14 @@ import json
 import os
 from pathlib import Path
 from urllib.parse import urlparse
+from xml.etree import ElementTree
 
 from pypdf import PdfReader, PdfWriter
 from pypdf.generic import (ArrayObject as Array, BooleanObject, DictionaryObject as Dict,
                            NameObject as Name, NumberObject as Number, TextStringObject)
+from reportlab.graphics import renderPDF
+from reportlab.graphics.shapes import Drawing, Group
+from reportlab.graphics.svgpath import SvgPath
 from reportlab.lib.colors import HexColor
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle
@@ -183,7 +187,31 @@ class Guide:
         writer.write(path)
 
 
-def header(g, data, compact=False):
+def pilot_icon(g, data):
+    root = Path(__file__).resolve().parents[2]
+    catalog = json.loads((root / "skills.json").read_text(encoding="utf-8"))
+    skill_id = urlparse(data["github"]).path.rsplit("/", 1)[-1]
+    identity = next((skill.get("visual_identity", {}) for skill in catalog["skills"]
+                     if skill["name"] == skill_id), {})
+    if identity.get("icon_status") != "pilot":
+        raise ValueError("A Skill não possui um ícone piloto registrado.")
+    svg = ElementTree.parse(root / identity["icon_negative"]).getroot()
+    path = svg.find("{http://www.w3.org/2000/svg}path")
+    if svg.get("viewBox") != "0 0 24 24" or path is None or path.get("fill") != "none":
+        raise ValueError("O ícone piloto requer um SVG de 24 unidades com traço.")
+    size = 30
+    scale = size / 24
+    shape = SvgPath(path.attrib["d"], fillColor=None, strokeColor=HexColor(path.attrib["stroke"]),
+                    strokeWidth=float(path.attrib["stroke-width"]), strokeLineCap=1, strokeLineJoin=1)
+    group = Group(shape)
+    group.transform = (scale, 0, 0, -scale, 0, size)
+    drawing = Drawing(size, size)
+    drawing.add(group)
+    with g.marked():
+        renderPDF.draw(drawing, g.canvas, W-M-size, H-22-size)
+
+
+def header(g, data, compact=False, include_pilot_icon=False):
     g.box(0, 0, W, H, PAPER)
     g.box(0, 0, W, 68 if compact else 154, g.accent)
     g.text("BIBLIOTECA DE SKILLS", M, 24, WIDTH, 8.5, 12, "Bold", WHITE)
@@ -191,6 +219,8 @@ def header(g, data, compact=False):
            WIDTH, 10.5, 14, "Bold", WHITE)
     if compact:
         return 87
+    if include_pilot_icon:
+        pilot_icon(g, data)
     bottom = g.text(data["titulo"], M-1, 73, WIDTH+1, 29, 33, "Serif", "#FFFFFF", "H1")
     if bottom > 140:
         raise ValueError("Encurte o título didático.")
@@ -322,7 +352,7 @@ def finish(g, data, top):
            "Link", url=data["github"])
 
 
-def render(data, path):
+def render(data, path, include_pilot_icon=False):
     url = urlparse(data["github"])
     if (url.scheme != "https" or url.netloc != "github.com"
             or not url.path.startswith("/Jadsonjg/ecosystem-agent-skills/tree/main/skills/")
@@ -331,7 +361,8 @@ def render(data, path):
     if len(data["cards"]) != 3 or not 1 <= len(data["quando_nao_usar"]) <= 3:
         raise ValueError("São obrigatórios três cards e de um a três exemplos de quando não usar.")
     g = Guide(data["nome"], institutional_color(data))
-    top = extra(g, data.get("adicional"), cards(g, data["cards"], header(g, data)))
+    top = header(g, data, include_pilot_icon=include_pilot_icon)
+    top = extra(g, data.get("adicional"), cards(g, data["cards"], top))
     if data.get("duas_paginas"):
         if demo(g, data["demonstracao_inicial"], top) > 806:
             raise ValueError("A primeira página excede a área útil.")
@@ -347,5 +378,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("conteudo", type=Path)
     parser.add_argument("pdf", type=Path)
+    parser.add_argument("--icone-piloto", action="store_true", help="Inclui o ícone em avaliação.")
     args = parser.parse_args()
-    render(json.loads(args.conteudo.read_text(encoding="utf-8")), args.pdf)
+    render(json.loads(args.conteudo.read_text(encoding="utf-8")), args.pdf, include_pilot_icon=args.icone_piloto)
