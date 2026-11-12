@@ -1,6 +1,7 @@
 {
   "nome": "Delegation Context Skill",
   "versao": "1.1.0",
+  "cor_institucional": "#143B36",
   "titulo": "Como delegar uma tarefa",
   "descricao": "Um guia para preparar instruções claras para outra pessoa, chat ou agente.",
   "cards": [

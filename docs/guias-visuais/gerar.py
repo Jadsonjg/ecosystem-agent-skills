@@ -1,4 +1,4 @@
-"""Gera guias A4 etiquetados do padrão visual 1.0.0."""
+"""Gera guias A4 etiquetados do padrão visual 1.1.0."""
 import argparse
 from contextlib import contextmanager
 from html import escape
@@ -19,17 +19,19 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.platypus import Paragraph
 
+from cores import MINT, PAPER, WHITE, institutional_color
+
 W, H = A4
 M = 42
 WIDTH = W - 2 * M
-PAPER, GREEN, INK = "#F7F7F2", "#143B36", "#202A26"
-MINT, LINE, MUTED = "#E8F1E9", "#CFDAD2", "#4B5A53"
+INK, LINE, MUTED = "#202A26", "#CFDAD2", "#4B5A53"
 CHAT, BLUE, CHAT_TEXT, CHAT_LABEL = "#212121", "#1E5AAD", "#ECECEC", "#B4B4B4"
 CARD_TITLES = ("Para que serve?", "O que resolve?", "Como se aplica?")
 
 
 class Guide:
-    def __init__(self, title):
+    def __init__(self, title, accent):
+        self.accent = accent
         font_dir = Path(os.getenv("SKILLS_FONT_DIR", "/usr/share/fonts/truetype/dejavu"))
         for alias, font in (("Sans", "DejaVuSans"), ("Bold", "DejaVuSans-Bold"), ("Serif", "DejaVuSerif")):
             pdfmetrics.registerFont(TTFont(alias, str(font_dir / f"{font}.ttf")))
@@ -173,10 +175,10 @@ class Guide:
 
 def header(g, data, compact=False):
     g.box(0, 0, W, H, PAPER)
-    g.box(0, 0, W, 68 if compact else 154, GREEN)
-    g.text("BIBLIOTECA DE SKILLS", M, 24, WIDTH, 8.5, 12, "Bold", MINT)
+    g.box(0, 0, W, 68 if compact else 154, g.accent)
+    g.text("BIBLIOTECA DE SKILLS", M, 24, WIDTH, 8.5, 12, "Bold", WHITE)
     g.text(f'{data["nome"].upper()} · v{data["versao"]}', M, 44 if compact else 51,
-           WIDTH, 10.5, 14, "Bold", MINT)
+           WIDTH, 10.5, 14, "Bold", WHITE)
     if compact:
         return 87
     bottom = g.text(data["titulo"], M-1, 73, WIDTH+1, 29, 33, "Serif", "#FFFFFF", "H1")
@@ -194,7 +196,7 @@ def cards(g, texts, top):
         x = M+index*(width+gap)
         with g.group("Sect"):
             g.box(x, top, width, 115, "#FFFFFF", 9, LINE)
-            y = g.text(title, x+11, top+14, width-22, 11, 14, "Bold", GREEN, "H2")
+            y = g.text(title, x+11, top+14, width-22, 11, 14, "Bold", g.accent, "H2")
             if g.text(text, x+11, y+7, width-22, 10.5, 15) > top+105:
                 raise ValueError(f"Encurte o card {title}")
     return top+115
@@ -215,13 +217,13 @@ def extra(g, data, top):
             with g.group("LI"):
                 g.box(x, y, w, 40, MINT, 6)
                 if numbered:
-                    g.box(x+8, y+11, 16, 16, GREEN, 8)
+                    g.box(x+8, y+11, 16, 16, g.accent, 8)
                     g.text(str(i+1), x+13, y+14, 10, 8, 10, "Bold", "#FFFFFF", "Lbl")
                 with g.group("LBody"):
                     offset = 30 if numbered else 9
-                    end = g.text(item["titulo"], x+offset, y+6, w-offset-6, 9.1, 12, "Bold", GREEN)
+                    end = g.text(item["titulo"], x+offset, y+6, w-offset-6, 9.1, 12, "Bold", g.accent)
                     if item.get("texto"):
-                        end = g.text(item["texto"], x+offset, end+1, w-offset-6, 8.6, 10, color=GREEN)
+                        end = g.text(item["texto"], x+offset, end+1, w-offset-6, 8.6, 10, color=g.accent)
                     if end > y+39:
                         raise ValueError("Encurte o item do conteúdo adicional.")
     return y+40
@@ -275,7 +277,7 @@ def demo(g, data, top):
 
 
 def finish(g, data, top):
-    y = g.text("Quando não usar?", M, top+12, WIDTH, 11, 15, "Bold", GREEN, "H2")+4
+    y = g.text("Quando não usar?", M, top+12, WIDTH, 11, 15, "Bold", g.accent, "H2")+4
     with g.group("L"):
         for example in data["quando_nao_usar"]:
             with g.group("LI"):
@@ -286,7 +288,7 @@ def finish(g, data, top):
         raise ValueError(f"O conteúdo excede a área útil A4 ({y:.1f} pt). Sintetize ou use a segunda página.")
     g.line(780)
     g.text("Para mais informações sobre a Skill:", M, 790, WIDTH, 9.5, 13, color=MUTED)
-    g.text("Consultar a pasta oficial no GitHub.", M, 806, WIDTH, 9.5, 13, "Bold", GREEN,
+    g.text("Consultar a pasta oficial no GitHub.", M, 806, WIDTH, 9.5, 13, "Bold", g.accent,
            "Link", url=data["github"])
 
 
@@ -298,7 +300,7 @@ def render(data, path):
         raise ValueError("Use o link verificado da pasta da Skill no monorepo.")
     if len(data["cards"]) != 3 or not 1 <= len(data["quando_nao_usar"]) <= 3:
         raise ValueError("São obrigatórios três cards e de um a três exemplos de quando não usar.")
-    g = Guide(data["nome"])
+    g = Guide(data["nome"], institutional_color(data))
     top = extra(g, data.get("adicional"), cards(g, data["cards"], header(g, data)))
     if data.get("duas_paginas"):
         if demo(g, data["demonstracao_inicial"], top) > 806:

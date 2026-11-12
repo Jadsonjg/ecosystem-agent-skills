@@ -7,6 +7,8 @@ import fitz
 from pypdf import PdfReader
 from pypdf.generic import ArrayObject, ContentStream, NumberObject
 
+from cores import WHITE, contrast, institutional_color
+
 
 def check(condition, reason):
     if not condition:
@@ -14,6 +16,8 @@ def check(condition, reason):
 
 
 def validate(path, data):
+    accent = institutional_color(data)
+    expected_rgb = tuple(bytes.fromhex(accent[1:]))
     reader = PdfReader(path)
     root = reader.root_object
     check(reader.pdf_header == "%PDF-1.7", "Cabeçalho PDF 1.7 ausente.")
@@ -104,7 +108,21 @@ def validate(path, data):
             found = combined.find(text, pos)
             check(found >= 0, f"Texto pesquisável ausente ou fora da ordem: {text}")
             pos = found+len(text)
-        for page in doc:
+        for index, page in enumerate(doc):
+            header_end = 154 if index == 0 else 68
+            header_rect = fitz.Rect(0, 0, page.rect.width, header_end)
+            header_fills = [drawing["fill"] for drawing in page.get_drawings()
+                            if drawing["rect"] == header_rect and drawing.get("fill")]
+            check(len(header_fills) == 1 and tuple(round(v*255) for v in header_fills[0]) == expected_rgb,
+                  "O cabeçalho não usa a cor institucional registrada.")
+            spans = [span for block in page.get_text("dict", flags=fitz.TEXTFLAGS_TEXT)["blocks"]
+                     for line in block["lines"] for span in line["spans"]]
+            header = [span for span in spans if span["bbox"][1] < header_end]
+            check(header and all(span["color"] == 0xFFFFFF for span in header), "Texto não branco no cabeçalho.")
+            fixed_accents = ("Para que serve?", "O que resolve?", "Como se aplica?", "Quando não usar?",
+                             "Consultar a pasta oficial no GitHub.")
+            check(all(span["color"] == int(accent[1:], 16) for span in spans if span["text"] in fixed_accents),
+                  "Um título funcional ou link está fora da cor institucional.")
             check(not page.get_images(), "O template atual prevê demonstrações vetoriais e textuais.")
             for x0,y0,x1,y1,*_ in page.get_text("blocks"):
                 check(x0 >= 39 and y0 >= 15 and x1 <= page.rect.width-39 and y1 <= page.rect.height-15,
@@ -117,5 +135,6 @@ if __name__ == "__main__":
     parser.add_argument("conteudo", type=Path)
     parser.add_argument("pdf", type=Path)
     args = parser.parse_args()
-    counts = validate(args.pdf, json.loads(args.conteudo.read_text(encoding="utf-8")))
-    print(f"OK: {counts[0]} página(s) A4, {counts[1]} blocos semânticos em ordem, {counts[2]} artefatos e link estruturado.")
+    data = json.loads(args.conteudo.read_text(encoding="utf-8"))
+    counts = validate(args.pdf, data)
+    print(f"OK: {counts[0]} página(s) A4, {counts[1]} blocos semânticos em ordem, {counts[2]} artefatos e link estruturado. Contraste branco/cor: {contrast(WHITE, institutional_color(data)):.2f}:1.")

@@ -1,0 +1,38 @@
+{
+  "nome": "Agentic Workflow Governance",
+  "versao": "2.0.0",
+  "cor_institucional": "#233D63",
+  "titulo": "Como organizar o trabalho",
+  "descricao": "Defina quem decide, quem coordena e quem executa em cada frente.",
+  "cards": [
+    "Ajuda a organizar projetos com várias pessoas, assistentes ou ferramentas.",
+    "Esclarece responsabilidades, limites de decisão e quando pedir aprovação.",
+    "Peça ajuda para distribuir papéis, definir limites e combinar onde registrar as decisões."
+  ],
+  "adicional": {
+    "titulo": "Quatro responsabilidades",
+    "sequencial": true,
+    "itens": [
+      {"titulo": "Operador"},
+      {"titulo": "Coordenador"},
+      {"titulo": "Gestor de domínio"},
+      {"titulo": "Executor"}
+    ]
+  },
+  "demonstracao": {
+    "titulo": "Como dividir as responsabilidades",
+    "cenario": "Exemplo · Mostra Estação do Bairro (projeto fictício)",
+    "paragrafos": [
+      "Operador: define o objetivo da mostra e aprova o orçamento.",
+      "Coordenador: alinha os prazos de programação e divulgação e resolve dependências entre as frentes.",
+      "Gestor de domínio: define a abordagem de divulgação e os critérios para aprovar as peças.",
+      "Executor: produz as peças conforme as instruções e apresenta o material para revisão.",
+      "A decisão fica com quem tem autoridade para tomá-la. Por exemplo, uma mudança de orçamento volta ao Operador."
+    ]
+  },
+  "quando_nao_usar": [
+    "Em tarefas simples e diretas, como resumir um aviso em três linhas.",
+    "Em uma pergunta isolada que não envolve responsabilidades, aprovações ou continuidade."
+  ],
+  "github": "https://github.com/Jadsonjg/ecosystem-agent-skills/tree/main/skills/agentic-workflow-governance"
+}

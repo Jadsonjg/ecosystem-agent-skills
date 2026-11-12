@@ -1,6 +1,7 @@
 {
   "nome": "Nível de Criticidade",
   "versao": "1.1.0",
+  "cor_institucional": "#59273F",
   "titulo": "Como pedir uma análise rigorosa",
   "descricao": "Ajuste o rigor da revisão antes de tomar uma decisão.",
   "cards": [

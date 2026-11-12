@@ -1,13 +1,13 @@
 # Padrão Visual da Biblioteca de Skills
 
-**Versão vigente: 1.0.0 · 12/11/2026**
+**Versão vigente: 1.1.0 · 12/11/2026**
 **Escopo:** Guias Rápidos da Biblioteca de Skills do Ecossistema IA & Operações.
 
 Este diretório é a referência oficial para escrever, gerar e conferir novos guias. A especificação da Skill correspondente em `skills/<identificador>/SKILL.md` define seu funcionamento. Este padrão define como apresentá-lo.
 
 ## Composição fixa
 
-1. Cabeçalho institucional verde-escuro, nome e versão da Skill, título didático e uma frase introdutória. A edição oficial usa “BIBLIOTECA DE SKILLS”. Em propostas, indique “PROPOSTA VISUAL — NÃO OFICIAL”.
+1. Cabeçalho na cor institucional registrada para a Skill, com texto branco, nome e versão da Skill, título didático e uma frase introdutória. A edição oficial usa “BIBLIOTECA DE SKILLS”. Em propostas, indique “PROPOSTA VISUAL — NÃO OFICIAL”.
 2. Três cards, nesta ordem: **Para que serve?**, **O que resolve?**, **Como se aplica?**. Use linguagem para leigos, com uma ideia por card. No A4, os três ficam lado a lado. Sintetize o texto antes de alterar o tamanho da fonte.
 3. Demonstração prática. Identifique o cenário e apresente uma situação concreta e fiel à Skill.
 4. **Quando não usar?** Mostre de um a três exemplos breves. Indique em que situações a Skill é dispensável.
@@ -17,12 +17,26 @@ O template implementa margens de 42 pt, vão de 12 pt entre cards, cabeçalho de
 
 | Cor | Uso |
 | --- | --- |
-| `#143B36` | Cabeçalho, títulos funcionais e link final |
-| `#F7F7F2` / `#FFFFFF` | Papel e cards |
+| `cor_institucional` | Fundo dos cabeçalhos, títulos dos cards, destaques do bloco adicional, título de “Quando não usar?” e link final |
+| `#F7F7F2` / `#FFFFFF` | Papel, cards e texto branco nos cabeçalhos |
 | `#202A26` / `#4B5A53` | Texto e informação secundária |
 | `#E8F1E9` / `#CFDAD2` | Realces e divisórias |
 | `#212121` / `#1E5AAD` | Fundo da conversa e balão do usuário |
 | `#ECECEC` / `#B4B4B4` | Texto e rótulos da conversa |
+
+## Cor institucional por Skill
+
+| Skill | Cor registrada | Branco no cabeçalho |
+| --- | --- | ---: |
+| [Delegation Context Skill](conteudo/delegation-context-skill.json) | Verde profundo · `#143B36` | 12,29:1 |
+| [Agentic Workflow Governance](conteudo/agentic-workflow-governance.json) | Azul profundo · `#233D63` | 10,94:1 |
+| [Nível de Criticidade](conteudo/nivel-de-criticidade.json) | Vinho profundo · `#59273F` | 11,75:1 |
+
+O registro está na chave `cor_institucional` do JSON de cada Skill. Ao adicionar uma Skill, compare as cores já registradas, escolha um tom profundo e distinguível e registre o código `#RRGGBB`. Use a cor solicitada pelo Operador quando houver. Se o tom não passar no contraste, ajuste-o para uma variante mais escura antes de registrar. Confirme o resultado nos guias renderizados. A geração sempre reutiliza o código registrado. Reavalie uma cor existente somente quando o Operador solicitar sua substituição.
+
+O gerador e o validador aplicam a luminância relativa sRGB da [WCAG 2.2](https://www.w3.org/TR/WCAG22/#dfn-relative-luminance). O mínimo é 7:1 para branco sobre a cor institucional, inclusive no cabeçalho compacto e na numeração. Os textos coloridos exigem no mínimo 4,5:1 sobre papel e realce claro. A tipografia, os fundos das áreas de leitura, as divisórias e a conversa mantêm os tons fixos da tabela. Os balões do usuário mantêm `#1E5AAD`. Nome, versão e rótulos identificam o conteúdo em texto.
+
+Todo JSON novo deve registrar uma cor. Para reproduzir arquivos de entrada históricos da v1.0.0 sem essa chave, o gerador usa o verde histórico `#143B36`.
 
 ## Escolha dos componentes
 
@@ -39,8 +53,8 @@ Pré-requisitos: Python 3.12, fontes DejaVu Sans e Serif e dependências de [req
 ```sh
 cd docs/guias-visuais
 python -m pip install -r requirements.txt
-python gerar.py conteudo/delegation-context-skill.json delegation-context-skill-guia-rapido-padrao-v1.0.0.pdf
-python validar.py conteudo/delegation-context-skill.json delegation-context-skill-guia-rapido-padrao-v1.0.0.pdf
+python gerar.py conteudo/delegation-context-skill.json delegation-context-skill-guia-rapido-padrao-v1.1.0.pdf
+python validar.py conteudo/delegation-context-skill.json delegation-context-skill-guia-rapido-padrao-v1.1.0.pdf
 ```
 
 1. Consulte o catálogo e o `SKILL.md` da versão vigente. Copie um dos exemplos em [conteudo/](conteudo/) e preencha o JSON com a explicação e a demonstração apropriadas.
@@ -52,6 +66,6 @@ python validar.py conteudo/delegation-context-skill.json delegation-context-skil
 
 O gerador usa PDF 1.7, `pt-BR`, título nos metadados, fontes incorporadas e texto selecionável. Titula H1–H3 em ordem, marca parágrafos e listas, vincula a anotação do link à estrutura e mantém a ordem de foco baseada na estrutura. Em conversas, a ordem é usuário, mensagem, assistente e resposta, repetida por turno. As formas decorativas são artefatos.
 
-A versão 1.0.0 trabalha com texto e vetores. Se um recurso exigir imagem informativa, estenda o gerador para produzir `Figure` com `Alt` e teste a leitura antes de publicar. Se usar tabelas futuramente, implemente cabeçalhos e associações semânticas. O validador atual recusa imagens não previstas. Use PDF/UA (ISO 14289) como referência. A validação implementada cobre os requisitos documentados e não representa certificação formal PDF/UA.
+O template trabalha com texto e vetores. Se um recurso exigir imagem informativa, estenda o gerador para produzir `Figure` com `Alt` e teste a leitura antes de publicar. Se usar tabelas futuramente, implemente cabeçalhos e associações semânticas. O validador atual recusa imagens não previstas. Use PDF/UA (ISO 14289) como referência. A validação implementada cobre os requisitos documentados e não representa certificação formal PDF/UA.
 
-O [relatório de implementação](IMPLEMENTACAO.md) registra os testes, as limitações e os dois guias da edição inicial.
+O [relatório da v1.1.0](IMPLEMENTACAO-1.1.0.md) registra as verificações, a aplicação aos três guias e os limites da validação. Consulte o [padrão histórico v1.0.0](https://github.com/Jadsonjg/ecosystem-agent-skills/blob/4b2ba9dff58d5526789c9420b6e6a44474c918fe/docs/guias-visuais/README.md) e seu [relatório](IMPLEMENTACAO.md).
