@@ -18,7 +18,8 @@
         "icon": "skills/delegation-context-skill/assets/identity/icone.svg",
         "icon_negative": "skills/delegation-context-skill/assets/identity/icone-negativo.svg",
         "icon_monochrome": "skills/delegation-context-skill/assets/identity/icone-monocromatico.svg",
-        "visual_guide_config": "docs/guias-visuais/conteudo/delegation-context-skill.json"
+        "visual_guide_config": "docs/guias-visuais/conteudo/delegation-context-skill.json",
+        "icon_png": "skills/delegation-context-skill/assets/identity/icone.png"
       }
     },
     {
