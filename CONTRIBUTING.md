@@ -43,3 +43,7 @@ A verificação automatizada abaixo cobre a estrutura. A decisão de portabilida
 ```sh
 python3 tests/validate_catalog.py
 ```
+
+## Guias rápidos em PDF
+
+Use o [Padrão Visual da Biblioteca de Skills](docs/guias-visuais/README.md) para gerar, validar e publicar o relatório de uso de cada Skill. O padrão define a composição, as regras de acessibilidade, os arquivos reutilizáveis e o limite de páginas.
