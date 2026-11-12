@@ -28,6 +28,8 @@ Este monorepo é público. Inclua somente Skills e materiais autorizados para pu
 3. **Revisão e autorização.** Incorpore as diretrizes do Operador. Comece a criar a Skill somente após autorização explícita para executar.
 4. **Criação e conclusão.** Implemente e valide, salve a fonte no GitHub, atualize o catálogo, a versão e o changelog. Entregue o relatório em PDF em `Meu Drive / Skills` com o caminho para a Skill, a versão atual, o que ela faz em linguagem simples, suas aplicações e exemplos de quando evitar seu uso.
 
+Na etapa 4, inclua a identidade iconográfica no mesmo trabalho. Após registrar a especificação e o conteúdo do guia, derive um conceito do propósito da Skill, desenhe seu SVG mestre e execute `python3 scripts/identidade.py prepare <identificador> --output <pasta-de-previas>`. Esse comando sincroniza os derivados, o catálogo e a documentação e gera e valida o guia. Use o [procedimento de identidade](docs/identidade-iconografica.md) para decidir o estado de publicação e preparar a distribuição. Em revisões funcionais que preservem a geometria, reutilize o mestre existente.
+
 ## Portabilidade obrigatória (vendor neutrality)
 
 Descreva o procedimento principal em termos de capacidades, entradas, resultados e limites. Declare as dependências necessárias e como substituí-las quando a plataforma mudar. Exemplos, metadados e adaptadores específicos de um fornecedor são permitidos quando opcionais e separados do procedimento principal.

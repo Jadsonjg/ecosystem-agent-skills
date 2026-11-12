@@ -7,13 +7,13 @@ Monorepo público de Skills do ecossistema. Consulte o [guia de contribuição](
 
 | Skill | Versão | Fonte oficial | Compatibilidade | Instalação nativa |
 | --- | --- | --- | --- | --- |
-| <picture><source media="(prefers-color-scheme: dark)" srcset="skills/delegation-context-skill/assets/identity/icone-negativo.svg"><img src="skills/delegation-context-skill/assets/identity/icone.svg" alt="" width="20" height="20"></picture> Delegation Context Skill <sup>(ícone piloto)</sup> | 1.1.0 | [SKILL.md](skills/delegation-context-skill/SKILL.md) | Interface de delegação vigente | [ChatGPT](https://chatgpt.com/skills?skill_id=6acbd243c8088191b2e61b170ec6779c) |
+| Delegation Context Skill | 1.1.0 | [SKILL.md](skills/delegation-context-skill/SKILL.md) | Interface de delegação vigente | [ChatGPT](https://chatgpt.com/skills?skill_id=6acbd243c8088191b2e61b170ec6779c) |
 | Agentic Workflow Governance | 2.0.0 | [Especificação canônica](skills/agentic-workflow-governance/references/especificacao-canonica.md) e [SKILL.md](skills/agentic-workflow-governance/SKILL.md) | Arquitetura de Trabalho Agentiva v2.0 | [ChatGPT](https://chatgpt.com/skills?skill_id=6acbe3f484b48191a13bc6797c8b6bf1) |
 | Nível de Criticidade | 1.1.0 | [Especificação canônica](skills/nivel-de-criticidade/references/especificacao-canonica.md) e [SKILL.md](skills/nivel-de-criticidade/SKILL.md) | Arquitetura de Trabalho Agentiva v2.0; governança 2.0.0 e delegação 1.1.0 | [ChatGPT](https://chatgpt.com/skills?skill_id=6ad15379a0888191a8ff569f84eed566) |
 
 [skills.json](skills.json) registra caminhos, versões e compatibilidade para conferência.
 
-[Demonstração do ícone e referência compacta](skills/delegation-context-skill/README.md)
+[Catálogo visual das Skills](docs/catalogo-visual.md)
 
 ## Autoridade e gestão
 
@@ -115,3 +115,13 @@ A Agentic Workflow Governance fica em `skills/agentic-workflow-governance/`, com
 `prompt-mestre.md` é uma exportação do corpo do `SKILL.md` da Delegation Context Skill para uso em outros chats. Deve ser regenerado junto com a fonte, sem manter lógica divergente. O [instalador-curto.md](skills/delegation-context-skill/instalador-curto.md) aponta para a fonte vigente; [exemplos.md](skills/delegation-context-skill/exemplos.md) demonstra o comportamento.
 
 A especificação canônica da Agentic Workflow Governance é versionada e deve permanecer alinhada à versão compatível da Arquitetura de Trabalho Agentiva. Ela não é um arquivo histórico imutável: mudanças estruturais aprovadas devem produzir nova versão e registro no changelog.
+
+<!-- identidade:inicio -->
+## Identidades iconográficas
+
+| Skill | Versão funcional | Identidade |
+| --- | --- | --- |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="skills/delegation-context-skill/assets/identity/icone-negativo.svg"><img src="skills/delegation-context-skill/assets/identity/icone.svg" alt="" width="20" height="20"></picture> [Delegation Context Skill](skills/delegation-context-skill/SKILL.md) | 1.1.0 | Piloto |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="skills/agentic-workflow-governance/assets/identity/icone-negativo.svg"><img src="skills/agentic-workflow-governance/assets/identity/icone.svg" alt="" width="20" height="20"></picture> [Agentic Workflow Governance](skills/agentic-workflow-governance/SKILL.md) | 2.0.0 | Piloto |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="skills/nivel-de-criticidade/assets/identity/icone-negativo.svg"><img src="skills/nivel-de-criticidade/assets/identity/icone.svg" alt="" width="20" height="20"></picture> [Nível de Criticidade](skills/nivel-de-criticidade/SKILL.md) | 1.1.0 | Piloto |
+<!-- identidade:fim -->

@@ -1,34 +1,47 @@
 # Identidade iconográfica das Skills
 
-**Estado da proposta** · Piloto da Delegation Context Skill. Os SVGs de interface existentes permanecem em uso. A aprovação do desenho e a adoção da convenção cabem ao Operador.
+**Estado** · Implementação de desenvolvimento. Três identidades em piloto. A versão funcional de cada Skill e o padrão PDF v1.2.0 são independentes do estado da identidade.
 
-## Fonte e aplicações
+## Entrada do fluxo
 
-O [catálogo](../skills.json) registra o estado, as variantes, o ícone de interface preexistente e o caminho da configuração visual que já define a cor. Resolva os caminhos a partir da raiz do repositório. A [documentação da Skill](../skills/delegation-context-skill/README.md) demonstra a referência compacta.
+Na etapa 4 da criação autorizada, prepare a especificação canônica, a entrada usual em `skills.json` e o JSON do guia em `docs/guias-visuais/conteudo/<id>.json`. Leia a finalidade e os limites da Skill. Proponha um conceito que permita reconhecê-la sem sua cor e desenhe uma vez o mestre em `skills/<id>/assets/identity/icone.svg`. Em revisão funcional, conserve o mestre quando o conceito permanecer adequado.
 
-Para reproduzir o PDF piloto, a partir de `docs/guias-visuais/` e com as dependências já documentadas:
+Use SVG autocontido com `viewBox="0 0 24 24"`, largura e altura 24, título descritivo e um path sem preenchimento. O traço é 1,6, com terminações e cantos arredondados. Use a cor já registrada no guia, preserve margem interna e revise a leitura a 16 e 24 px. Reutilize a estrutura de um mestre existente. Para fundo escuro use branco, para fundo claro use a cor institucional e para contexto neutro use a variante monocromática.
+
+Instale as dependências fixadas em `docs/guias-visuais/requirements.txt`, use as fontes do padrão vigente e disponibilize o veraPDF quando houver revisão de publicação. Da raiz, execute:
 
 ```sh
-python gerar.py conteudo/delegation-context-skill.json delegation-context-icone-piloto.pdf --icone-piloto
-python validar.py conteudo/delegation-context-skill.json delegation-context-icone-piloto.pdf
-verapdf --flavour ua1 --format xml delegation-context-icone-piloto.pdf
+python3 scripts/identidade.py prepare <id> --output <pasta-de-previas>
+python3 scripts/identidade.py check
+python3 tests/validate_catalog.py
+python3 -m unittest discover -s tests -p test_identidade.py
 ```
 
-O modo opcional lê a variante negativa no catálogo e desenha o traço como vetor decorativo. O nome permanece no texto do cabeçalho. Sem o parâmetro, a geração segue o padrão vigente.
+`prepare` sincroniza variantes SVG, PNG transparente de 512 px, SHA-256 do mestre e do PNG, catálogo visual e trechos marcados de README. Gera os guias e executa o validador interno. Se encontrar veraPDF, executa `ua1`, registra o XML e reprova resultado sem conformidade automatizada. Se estiver indisponível, registra a pendência. `build` atualiza os arquivos de identidade sem gerar guias. `check` somente verifica. Sem IDs, o comando atua sobre todas as entradas. As decisões criativas ficam com o agente encarregado da criação. As tarefas determinísticas passam pelo script.
 
-## Instrução para copiar
+As prévias são geradas com o ícone piloto. O modo normal do gerador consulta o catálogo e exibe automaticamente identidades aprovadas. O símbolo fica no primeiro cabeçalho, como artefato vetorial decorativo, com o nome em texto. Os PDFs de avaliação devem ficar fora da pasta oficial do Drive.
 
-> Ao apresentar nominalmente uma Skill do ecossistema, consulte skills.json em https://github.com/Jadsonjg/ecosystem-agent-skills. Use somente um ícone registrado como aprovado e exiba a imagem oficial ao lado ou imediatamente antes do nome textual, se a superfície puder renderizá-la. Use a variante apropriada ao fundo. Se a superfície aceitar somente PNG, derive-o do SVG aprovado sem redesenhar. Se faltar acesso, aprovação ou suporte visual, mostre somente o nome. Preserve identificadores, caminhos, URLs, código, comandos e dados estruturados. Não substitua ícones por emojis, imagens genéricas ou links soltos.
+## Publicação e continuidade
 
-## Aplicação e teste
+Use uma cópia de trabalho isolada por alteração. Faça commit de mestre, derivados, catálogo e documentação juntos e publique somente no branch autorizado, com atualização que falhe se a referência remota tiver avançado. Em caso de conflito, releia o catálogo remoto, reconcilie alterações e execute `check` novamente. Arquivos locais são trocados individualmente de forma atômica. Se houver interrupção, repita `prepare` na mesma cópia de trabalho antes de qualquer publicação.
 
-| Superfície | Configuração proposta |
-| --- | --- |
-| ChatGPT Web/Desktop | Após aprovação, acrescente o trecho em Configurações → Personalização → Instruções personalizadas. Preserve as instruções existentes. A regra orienta a resposta e depende de acesso ao catálogo e de suporte do renderizador. |
-| Projetos ChatGPT | Em cada projeto que aderir à convenção, acrescente o trecho em Configurações do projeto e forneça acesso ao catálogo como fonte ou via conector já autorizado. As instruções do projeto prevalecem sobre as globais. |
-| Agentes especializados | Adicione o trecho às instruções de inicialização e disponibilize o catálogo e o acesso aos assets. Para um teste isolado, fixe o branch piloto e permita `pilot` apenas para a Delegation Context. |
-| Skill nativa | Os campos `icon_small` e `icon_large` são metadados de interface. O piloto mantém os campos vigentes. A exibição no corpo de uma resposta depende da superfície e deve ser testada separadamente. |
-| Work | Use uma imagem PNG derivada do SVG em Markdown com um arquivo disponível na sessão, se a interface oferecer essa renderização. Mantenha o nome no texto. O tamanho e o alinhamento dependem da interface. |
-| Chat comum e mobile | Verifique o comportamento em cada superfície. Um link de arquivo, uma resposta em Markdown e uma imagem efetivamente visível são evidências diferentes. Quando só houver texto, aplique o fallback. |
+Para oficializar, obtenha a decisão do Operador sobre os conceitos, confira a prancha em tamanho reduzido, valide os três guias incluindo o perfil automatizado PDF/UA-1 e revise a diferença do commit. Registre explicitamente `approved` apenas nas identidades autorizadas, execute as verificações novamente e publique nos destinos autorizados. Mudanças posteriores em identidade aprovada são detectadas pelo pipeline e exigem revisão explícita. Os assets legados de interface ficam fora dessa troca. Instalações nativas seguem seu próprio fluxo.
 
-Em chats separados, pergunte “Quais Skills estão disponíveis no nosso ecossistema?” e “Qual habilidade nossa ajuda a preparar instruções para outro agente?”. Repita a primeira pergunta em um projeto com instruções próprias e em um ambiente de texto puro. Compare o que o usuário efetivamente vê. Registre imagem carregada, nome textual, origem, tema, configuração e preservação de exemplos técnicos. A presença do SVG em GitHub é evidência de registro. Para confirmar propagação, observe o símbolo em outro chat que recebeu a regra pela configuração, sem que a pergunta forneça o asset ou a instrução.
+## Recuperação em conversas
+
+Consulte `skills.json` em uma revisão publicada. O par commit e caminho em `icon_png` determina a URL estável, e `asset_sha256` identifica o PNG. Para resolver automaticamente a partir do catálogo da mesma revisão:
+
+```sh
+python3 scripts/identidade.py resolve --commit <sha-completo>
+python3 scripts/identidade.py verify-remote --commit <sha-completo>
+```
+
+Use `--allow-pilot` somente em ensaios autorizados. A revisão informada deve corresponder ao catálogo consultado. Recupere por HTTPS, confira o tipo de conteúdo e a assinatura do arquivo e, quando possível, compare SHA-256. Em superfícies com renderização de arquivos, use o PNG recuperado. Em fundo escuro com SVG disponível, prefira a variante negativa. Quando só houver suporte a PNG, confira o contraste na superfície usada. Se o ambiente não puder carregar ou exibir o asset, use o nome textual.
+
+> Ao apresentar nominalmente uma Skill do ecossistema, consulte o catálogo oficial em Jadsonjg/ecosystem-agent-skills. Exiba o ícone aprovado e recuperado junto ao nome textual quando a interface oferecer suporte. Use a variante adequada ao fundo. Quando faltar acesso, aprovação ou suporte, use somente o nome. Preserve código, comandos, URLs, identificadores e dados estruturados. Não use emojis, símbolos genéricos ou links isolados como substitutos.
+
+A mesma instrução pode ser incorporada à inicialização de agentes, instruções de projetos aderentes ou personalização autorizada. Forneça acesso ao catálogo por meio disponível na superfície. Nenhum desses mecanismos garante a renderização. Metadados nativos de interface são independentes do corpo da resposta.
+
+## Teste integral
+
+**PENDENTE DE TESTE REAL — AGUARDANDO FUTURA DEMANDA DO OPERADOR.** O primeiro teste integral começa quando uma nova Skill real for solicitada e autorizada. Valide sua portabilidade e conclua o fluxo normal de criação e publicação. Para propagação conversacional, teste uma conversa independente que receba a convenção pela configuração e pergunte sobre a Skill sem fornecer arquivo ou URL. Registre separadamente identificação, localização, download, exibição observada e integridade do arquivo.

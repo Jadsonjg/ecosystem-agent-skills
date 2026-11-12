@@ -19,7 +19,9 @@
         "icon_negative": "skills/delegation-context-skill/assets/identity/icone-negativo.svg",
         "icon_monochrome": "skills/delegation-context-skill/assets/identity/icone-monocromatico.svg",
         "visual_guide_config": "docs/guias-visuais/conteudo/delegation-context-skill.json",
-        "icon_png": "skills/delegation-context-skill/assets/identity/icone.png"
+        "icon_png": "skills/delegation-context-skill/assets/identity/icone.png",
+        "asset_sha256": "ed74e7b4c20ee665e81ef0268048f25b49c09b9070a4d06a0cad16cff0fc9b21",
+        "svg_sha256": "3bb61fe71e3d824b57b3f54ab6be025ba4a4a27d9f511e258d35e42acad1e330"
       }
     },
     {
@@ -31,9 +33,15 @@
       "canonical_source": "skills/agentic-workflow-governance/references/especificacao-canonica.md",
       "chatgpt_url": "https://chatgpt.com/skills?skill_id=6acbe3f484b48191a13bc6797c8b6bf1",
       "visual_identity": {
-        "icon_status": "pending_approval",
+        "icon_status": "pilot",
         "existing_interface_icon": "skills/agentic-workflow-governance/assets/icon.svg",
-        "visual_guide_config": "docs/guias-visuais/conteudo/agentic-workflow-governance.json"
+        "visual_guide_config": "docs/guias-visuais/conteudo/agentic-workflow-governance.json",
+        "icon": "skills/agentic-workflow-governance/assets/identity/icone.svg",
+        "icon_png": "skills/agentic-workflow-governance/assets/identity/icone.png",
+        "icon_negative": "skills/agentic-workflow-governance/assets/identity/icone-negativo.svg",
+        "icon_monochrome": "skills/agentic-workflow-governance/assets/identity/icone-monocromatico.svg",
+        "asset_sha256": "24ffceed30342e35ddf15af7ec4b8827511fdaa02654ebadbdfafa7bff93f375",
+        "svg_sha256": "5a8f0392b601a4238954b7a49e5da5c3b39141def938973ce86fba741803fa14"
       }
     },
     {
@@ -51,9 +59,15 @@
       "native_status": "installed_verified",
       "chatgpt_url": "https://chatgpt.com/skills?skill_id=6ad15379a0888191a8ff569f84eed566",
       "visual_identity": {
-        "icon_status": "pending_approval",
+        "icon_status": "pilot",
         "existing_interface_icon": "skills/nivel-de-criticidade/assets/icon.svg",
-        "visual_guide_config": "docs/guias-visuais/conteudo/nivel-de-criticidade.json"
+        "visual_guide_config": "docs/guias-visuais/conteudo/nivel-de-criticidade.json",
+        "icon": "skills/nivel-de-criticidade/assets/identity/icone.svg",
+        "icon_png": "skills/nivel-de-criticidade/assets/identity/icone.png",
+        "icon_negative": "skills/nivel-de-criticidade/assets/identity/icone-negativo.svg",
+        "icon_monochrome": "skills/nivel-de-criticidade/assets/identity/icone-monocromatico.svg",
+        "asset_sha256": "a9235814bd8df1b3eed9c6c1552b50f84a81e9644d4b0defa3a272f54997ca76",
+        "svg_sha256": "ef140eaaebadf964edb7c43548a22be0e1f1bd83e580a3d33202f96fc22bff2b"
       }
     }
   ]

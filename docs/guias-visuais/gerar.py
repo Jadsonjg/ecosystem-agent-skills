@@ -187,14 +187,15 @@ class Guide:
         writer.write(path)
 
 
-def pilot_icon(g, data):
+def institutional_icon(g, data, include_pilot):
     root = Path(__file__).resolve().parents[2]
     catalog = json.loads((root / "skills.json").read_text(encoding="utf-8"))
     skill_id = urlparse(data["github"]).path.rsplit("/", 1)[-1]
     identity = next((skill.get("visual_identity", {}) for skill in catalog["skills"]
                      if skill["name"] == skill_id), {})
-    if identity.get("icon_status") != "pilot":
-        raise ValueError("A Skill não possui um ícone piloto registrado.")
+    states = {"approved", "pilot"} if include_pilot else {"approved"}
+    if identity.get("icon_status") not in states:
+        return
     svg = ElementTree.parse(root / identity["icon_negative"]).getroot()
     path = svg.find("{http://www.w3.org/2000/svg}path")
     if svg.get("viewBox") != "0 0 24 24" or path is None or path.get("fill") != "none":
@@ -219,8 +220,7 @@ def header(g, data, compact=False, include_pilot_icon=False):
            WIDTH, 10.5, 14, "Bold", WHITE)
     if compact:
         return 87
-    if include_pilot_icon:
-        pilot_icon(g, data)
+    institutional_icon(g, data, include_pilot_icon)
     bottom = g.text(data["titulo"], M-1, 73, WIDTH+1, 29, 33, "Serif", "#FFFFFF", "H1")
     if bottom > 140:
         raise ValueError("Encurte o título didático.")
