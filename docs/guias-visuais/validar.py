@@ -8,6 +8,7 @@ from pypdf import PdfReader
 from pypdf.generic import ArrayObject, ContentStream, NumberObject
 
 from cores import WHITE, contrast, institutional_color
+from metadados import validate_xmp
 
 
 def check(condition, reason):
@@ -25,6 +26,7 @@ def validate(path, data):
     check(len(pages) == (2 if data.get("duas_paginas") else 1), "Paginação incorreta.")
     check(root.get("/Lang") == "pt-BR", "Idioma incorreto.")
     check(root["/MarkInfo"]["/Marked"] and reader.metadata.title, "Marcações ou título ausentes.")
+    validate_xmp(reader, f'{data["nome"]} | Guia Rápido de Skills')
     struct = root["/StructTreeRoot"]
     parent_array = struct["/ParentTree"]["/Nums"]
     parents = {int(parent_array[i]): parent_array[i+1] for i in range(0, len(parent_array), 2)}

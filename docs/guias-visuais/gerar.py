@@ -20,6 +20,7 @@ from reportlab.pdfgen.canvas import Canvas
 from reportlab.platypus import Paragraph
 
 from cores import MINT, PAPER, WHITE, institutional_color
+from metadados import write_xmp
 
 W, H = A4
 M = 42
@@ -127,6 +128,7 @@ class Guide:
         self.raw.seek(0)
         writer = PdfWriter(clone_from=PdfReader(self.raw))
         writer.pdf_header = "%PDF-1.7"
+        write_xmp(writer)
         root = writer.root_object
         add = writer._add_object  # pypdf fixado em requirements.txt
         root[Name("/Lang")] = TextStringObject("pt-BR")
