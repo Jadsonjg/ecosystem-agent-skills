@@ -187,16 +187,19 @@ class Guide:
         writer.write(path)
 
 
+REPOSITORY = Path(__file__).resolve().parents[2]
+CATALOG_PATH = REPOSITORY / "skills.json"
+
+
 def institutional_icon(g, data, include_pilot):
-    root = Path(__file__).resolve().parents[2]
-    catalog = json.loads((root / "skills.json").read_text(encoding="utf-8"))
+    catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
     skill_id = urlparse(data["github"]).path.rsplit("/", 1)[-1]
     identity = next((skill.get("visual_identity", {}) for skill in catalog["skills"]
                      if skill["name"] == skill_id), {})
     states = {"approved", "pilot"} if include_pilot else {"approved"}
     if identity.get("icon_status") not in states:
         return
-    svg = ElementTree.parse(root / identity["icon_negative"]).getroot()
+    svg = ElementTree.parse(REPOSITORY / identity["icon_negative"]).getroot()
     path = svg.find("{http://www.w3.org/2000/svg}path")
     if svg.get("viewBox") != "0 0 24 24" or path is None or path.get("fill") != "none":
         raise ValueError("O ícone piloto requer um SVG de 24 unidades com traço.")

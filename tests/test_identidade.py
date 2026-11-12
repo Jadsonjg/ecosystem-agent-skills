@@ -41,6 +41,7 @@ class IdentityTests(unittest.TestCase):
     def test_check_rejects_broken_reference_and_corrupt_png(self):
         info = self.skill["visual_identity"]
         original = info["icon_png"]
+        info["icon_status"] = "pilot"
         info["icon_png"] = "../broken.png"
         with self.assertRaisesRegex(ValueError, "Catálogo divergente"):
             identity.change_catalog(self.catalog, [self.skill], True)
@@ -69,6 +70,7 @@ class IdentityTests(unittest.TestCase):
             identity.plan(self.skill)
 
     def test_distribution_is_pinned_and_pilot_is_opt_in(self):
+        self.skill["visual_identity"]["icon_status"] = "pilot"
         self.assertIsNone(identity.distribution(self.skill, COMMIT)["icon"])
         result = identity.distribution(self.skill, COMMIT, allow_pilot=True)
         self.assertIn(COMMIT, result["icon"])

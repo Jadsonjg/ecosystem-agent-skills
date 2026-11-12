@@ -13,7 +13,7 @@
       "compatibility_export": "skills/delegation-context-skill/prompt-mestre.md",
       "chatgpt_url": "https://chatgpt.com/skills?skill_id=6acbd243c8088191b2e61b170ec6779c",
       "visual_identity": {
-        "icon_status": "pilot",
+        "icon_status": "approved",
         "existing_interface_icon": "skills/delegation-context-skill/assets/icon.svg",
         "icon": "skills/delegation-context-skill/assets/identity/icone.svg",
         "icon_negative": "skills/delegation-context-skill/assets/identity/icone-negativo.svg",
@@ -33,7 +33,7 @@
       "canonical_source": "skills/agentic-workflow-governance/references/especificacao-canonica.md",
       "chatgpt_url": "https://chatgpt.com/skills?skill_id=6acbe3f484b48191a13bc6797c8b6bf1",
       "visual_identity": {
-        "icon_status": "pilot",
+        "icon_status": "approved",
         "existing_interface_icon": "skills/agentic-workflow-governance/assets/icon.svg",
         "visual_guide_config": "docs/guias-visuais/conteudo/agentic-workflow-governance.json",
         "icon": "skills/agentic-workflow-governance/assets/identity/icone.svg",
@@ -59,7 +59,7 @@
       "native_status": "installed_verified",
       "chatgpt_url": "https://chatgpt.com/skills?skill_id=6ad15379a0888191a8ff569f84eed566",
       "visual_identity": {
-        "icon_status": "pilot",
+        "icon_status": "approved",
         "existing_interface_icon": "skills/nivel-de-criticidade/assets/icon.svg",
         "visual_guide_config": "docs/guias-visuais/conteudo/nivel-de-criticidade.json",
         "icon": "skills/nivel-de-criticidade/assets/identity/icone.svg",

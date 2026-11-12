@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-11-12 — Oficialização da identidade iconográfica
+
+- Aprovação do Operador para as três identidades e para o pipeline do piloto `3636f0fb3428ddfa744b2d656116a8b44d2587b8`.
+- Catálogo, variantes SVG e PNG, documentação, inventário, gerador de guias e regressões integrados à `main`. Identidades em estado `approved`, com assets legados e versões funcionais preservados.
+- Guias oficiais v1.2.0 regenerados com a identidade aprovada. Validador interno, regressões e veraPDF 1.30.4 com perfil `ua1` aprovados para os três guias, com 106 regras e zero falhas em cada um. Comparação a 144 dpi limitada à região do ícone.
+- As edições com identidade ficam em [Meu Drive / Skills](https://drive.google.com/drive/folders/1rRFedy2sxODJTqnh9Q2xGBaySnxjOGuF), com sufixo `-v1.2.0-identidade.pdf`. As edições anteriores foram preservadas para recuperação.
+- A leitura com tecnologia assistiva e a propagação entre conversas são verificações distintas. A primeira criação real de ponta a ponta aguarda futura demanda do Operador.
+
+
 Registrar todas as mudanças relevantes das Skills geridas neste repositório.
 
 ## Organização do monorepo — 2026-11-12

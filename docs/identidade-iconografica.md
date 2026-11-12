@@ -1,6 +1,6 @@
 # Identidade iconográfica das Skills
 
-**Estado** · Implementação de desenvolvimento. Três identidades em piloto. A versão funcional de cada Skill e o padrão PDF v1.2.0 são independentes do estado da identidade.
+**Estado** · Padrão oficial desde 12/11/2026. As três identidades estão aprovadas. A versão funcional de cada Skill e o padrão PDF v1.2.0 são independentes do estado da identidade.
 
 ## Entrada do fluxo
 
@@ -29,16 +29,16 @@ Para oficializar, obtenha a decisão do Operador sobre os conceitos, confira a p
 
 ## Recuperação em conversas
 
-Consulte `skills.json` em uma revisão publicada. O par commit e caminho em `icon_png` determina a URL estável, e `asset_sha256` identifica o PNG. Para resolver automaticamente a partir do catálogo da mesma revisão:
+Consulte exclusivamente o catálogo oficial na branch `main`. Fixe o SHA da revisão consultada antes de resolver os assets. O par commit e caminho em `icon_png` determina a URL estável, e `asset_sha256` identifica o PNG. Para resolver automaticamente a partir do catálogo da mesma revisão:
 
 ```sh
 python3 scripts/identidade.py resolve --commit <sha-completo>
 python3 scripts/identidade.py verify-remote --commit <sha-completo>
 ```
 
-Use `--allow-pilot` somente em ensaios autorizados. A revisão informada deve corresponder ao catálogo consultado. Recupere por HTTPS, confira o tipo de conteúdo e a assinatura do arquivo e, quando possível, compare SHA-256. Em superfícies com renderização de arquivos, use o PNG recuperado. Em fundo escuro com SVG disponível, prefira a variante negativa. Quando só houver suporte a PNG, confira o contraste na superfície usada. Se o ambiente não puder carregar ou exibir o asset, use o nome textual.
+Na convenção institucional, use apenas os estados aprovados e a mesma revisão do catálogo. Recupere por HTTPS, confira o tipo de conteúdo e a assinatura do arquivo e, quando possível, compare SHA-256. Em superfícies com renderização de arquivos, use o PNG recuperado. Em fundo escuro com SVG disponível, prefira a variante negativa. Quando só houver suporte a PNG, confira o contraste na superfície usada. Se o ambiente não puder carregar ou exibir o asset, use o nome textual.
 
-> Ao apresentar nominalmente uma Skill do ecossistema, consulte o catálogo oficial em Jadsonjg/ecosystem-agent-skills. Exiba o ícone aprovado e recuperado junto ao nome textual quando a interface oferecer suporte. Use a variante adequada ao fundo. Quando faltar acesso, aprovação ou suporte, use somente o nome. Preserve código, comandos, URLs, identificadores e dados estruturados. Não use emojis, símbolos genéricos ou links isolados como substitutos.
+> Ao apresentar nominalmente uma Skill do ecossistema, consulte o catálogo oficial na branch main de Jadsonjg/ecosystem-agent-skills. Recupere somente o PNG aprovado na mesma revisão. Exiba o ícone recuperado junto ao nome textual quando a interface oferecer suporte. Use a variante adequada ao fundo. Quando faltar acesso, aprovação ou suporte, use somente o nome. Preserve código, comandos, URLs, identificadores e dados estruturados. Não use emojis, símbolos genéricos ou links isolados como substitutos.
 
 A mesma instrução pode ser incorporada à inicialização de agentes, instruções de projetos aderentes ou personalização autorizada. Forneça acesso ao catálogo por meio disponível na superfície. Nenhum desses mecanismos garante a renderização. Metadados nativos de interface são independentes do corpo da resposta.
 

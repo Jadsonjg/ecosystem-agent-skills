@@ -1,6 +1,6 @@
 # Delegation Context Skill
 
-**Identidade iconográfica em avaliação.** A Skill continua na versão funcional 1.1.0.
+**Identidade iconográfica aprovada.** A Skill continua na versão funcional 1.1.0.
 
 A Skill ajuda a transformar um pedido em instruções claras para outro agente ou pessoa. A definição funcional está no [SKILL.md](SKILL.md).
 
@@ -11,5 +11,5 @@ Consulte a [convenção de apresentação em conversas](../../docs/identidade-ic
 <!-- identidade:inicio -->
 ## Identidade iconográfica
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="../../skills/delegation-context-skill/assets/identity/icone-negativo.svg"><img src="../../skills/delegation-context-skill/assets/identity/icone.svg" alt="" width="24" height="24"></picture> **Delegation Context Skill** · Piloto
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../skills/delegation-context-skill/assets/identity/icone-negativo.svg"><img src="../../skills/delegation-context-skill/assets/identity/icone.svg" alt="" width="24" height="24"></picture> **Delegation Context Skill** · Aprovada
 <!-- identidade:fim -->

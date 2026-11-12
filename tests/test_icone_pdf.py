@@ -1,15 +1,17 @@
-"""Regressão de página entre os guias com e sem ícone piloto."""
+"""Regressão de página entre os guias com e sem ícone aprovado."""
 import json
 from pathlib import Path
 import sys
 from tempfile import TemporaryDirectory
 import unittest
+from unittest.mock import patch
 
 import fitz
 from pypdf import PdfReader
 
 GUIDES = Path(__file__).resolve().parents[1] / "docs" / "guias-visuais"
 sys.path.insert(0, str(GUIDES))
+import gerar
 from gerar import H, M, W, render
 from validar import validate
 
@@ -24,14 +26,20 @@ def tags(node):
 
 
 class IconPdfTests(unittest.TestCase):
-    def test_pilot_only_changes_icon_rectangle(self):
+    def test_approved_icon_only_changes_icon_rectangle(self):
         with TemporaryDirectory() as directory:
             before, after = [Path(directory) / f"{name}.pdf" for name in ("before", "after")]
+            no_icons = Path(directory) / "skills.json"
+            catalog = json.loads(gerar.CATALOG_PATH.read_text())
+            for entry in catalog["skills"]:
+                entry.pop("visual_identity", None)
+            no_icons.write_text(json.dumps(catalog))
             for config in sorted((GUIDES / "conteudo").glob("*.json")):
                 with self.subTest(skill=config.stem):
                     data = json.loads(config.read_text())
-                    render(data, before)
-                    render(data, after, include_pilot_icon=True)
+                    with patch.object(gerar, "CATALOG_PATH", no_icons):
+                        render(data, before)
+                    render(data, after)
                     validate(after, data)
                     a, b = map(PdfReader, (before, after))
                     self.assertEqual(a.root_object["/Metadata"].get_data(), b.root_object["/Metadata"].get_data())
