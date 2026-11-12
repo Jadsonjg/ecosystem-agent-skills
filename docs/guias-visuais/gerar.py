@@ -1,4 +1,4 @@
-"""Gera guias A4 etiquetados do padrão visual 1.1.0."""
+"""Gera guias A4 etiquetados do padrão visual 1.2.0."""
 import argparse
 from contextlib import contextmanager
 from html import escape
@@ -89,6 +89,14 @@ class Guide:
             self.canvas.setStrokeColor(HexColor(LINE))
             self.canvas.setLineWidth(.65)
             self.canvas.line(M, H-y, W-M, H-y)
+
+    def arrow(self, start, end, y):
+        with self.marked():
+            self.canvas.setStrokeColor(HexColor(self.accent))
+            self.canvas.setLineWidth(1)
+            self.canvas.line(start, H-y, end, H-y)
+            self.canvas.line(end-3, H-y+3, end, H-y)
+            self.canvas.line(end-3, H-y-3, end, H-y)
 
     def paragraph(self, text, size, lead, font, color, label=None):
         markup = escape(text)
@@ -209,10 +217,18 @@ def extra(g, data, top):
     if not 2 <= len(items) <= 4:
         raise ValueError("Use de dois a quatro itens no conteúdo adicional.")
     y = g.text(data["titulo"], M, top+12, WIDTH, 15.5, 20, "Serif", tag="H2")+6
-    w = (WIDTH-9*(len(items)-1))/len(items)
+    relation = data.get("relacao")
+    if "relacao" in data:
+        if not isinstance(relation, str) or not relation.strip():
+            raise ValueError("O diagrama exige uma descrição textual da relação.")
+        y = g.text(relation, M, y-1, WIDTH, 10, 14)+7
+    gap = 18 if relation else 9
+    w = (WIDTH-gap*(len(items)-1))/len(items)
     with g.group("L"):
         for i, item in enumerate(items):
-            x = M+i*(w+9)
+            x = M+i*(w+gap)
+            if relation and i:
+                g.arrow(x-gap+3, x-3, y+20)
             numbered = data.get("sequencial")
             with g.group("LI"):
                 g.box(x, y, w, 40, MINT, 6)
@@ -276,6 +292,18 @@ def demo(g, data, top):
     return y+4
 
 
+def guidance(g, data, top):
+    if not data:
+        return top
+    if not data["paragrafos"]:
+        raise ValueError("A orientação complementar requer conteúdo.")
+    with g.group("Sect"):
+        y = g.text(data["titulo"], M, top+12, WIDTH, 11, 15, "Bold", g.accent, "H2")+4
+        for paragraph in data["paragrafos"]:
+            y = g.text(paragraph, M, y, WIDTH, 10.5, 14)+3
+    return y
+
+
 def finish(g, data, top):
     y = g.text("Quando não usar?", M, top+12, WIDTH, 11, 15, "Bold", g.accent, "H2")+4
     with g.group("L"):
@@ -307,7 +335,8 @@ def render(data, path):
             raise ValueError("A primeira página excede a área útil.")
         g.end_page()
         top = header(g, data, compact=True)
-    finish(g, data, demo(g, data["demonstracao"], top))
+    top = demo(g, data["demonstracao"], top)
+    finish(g, data, guidance(g, data.get("orientacao"), top))
     g.end_page()
     g.save(path)
 

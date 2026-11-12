@@ -93,18 +93,26 @@ def validate(path, data):
         check([mcid for p, mcid, _ in actual if p == idx] == list(range(len(parents[idx]))), "MCIDs inválidos.")
     check(actual == ordered and artifacts > 0, "Ordem da árvore diverge do conteúdo ou faltam artefatos.")
     with fitz.open(path) as doc:
-        combined = "".join(page.get_text() for page in doc)
+        combined = " ".join(" ".join(page.get_text() for page in doc).split())
         sections = [data["titulo"], "Para que serve?", "O que resolve?", "Como se aplica?"]
-        if data.get("adicional"):
-            sections.append(data["adicional"]["titulo"])
+        if extra := data.get("adicional"):
+            sections.append(extra["titulo"])
+            if "relacao" in extra:
+                check(isinstance(extra["relacao"], str) and bool(extra["relacao"].strip()), "Diagrama sem descrição.")
+                check("/L" in tags and tags.count("/LBody") >= len(extra["itens"]), "Rótulos do diagrama sem lista semântica.")
+                sections.append(extra["relacao"])
+                sections.extend(item["titulo"] for item in extra["itens"])
         demos = [data["demonstracao_inicial"], data["demonstracao"]] if data.get("duas_paginas") else [data["demonstracao"]]
         for demo in demos:
             sections.append(demo["titulo"])
             for _ in demo.get("turnos", []):
                 sections.extend(("Você", "Assistente"))
+        if guide := data.get("orientacao"):
+            sections.extend([guide["titulo"], *guide["paragrafos"]])
         sections += ["Quando não usar?", "Para mais informações sobre a Skill:", "Consultar a pasta oficial no GitHub."]
         pos = 0
         for text in sections:
+            text = " ".join(text.split())
             found = combined.find(text, pos)
             check(found >= 0, f"Texto pesquisável ausente ou fora da ordem: {text}")
             pos = found+len(text)

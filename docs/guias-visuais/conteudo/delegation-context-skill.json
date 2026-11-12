@@ -13,31 +13,62 @@
     "titulo": "A resposta vem em quatro partes",
     "sequencial": true,
     "itens": [
-      {"titulo": "Ação"},
-      {"titulo": "Resultado esperado"},
-      {"titulo": "Raciocínio recomendado"},
-      {"titulo": "Instruções de execução"}
+      {
+        "titulo": "Ação"
+      },
+      {
+        "titulo": "Resultado esperado"
+      },
+      {
+        "titulo": "Raciocínio recomendado"
+      },
+      {
+        "titulo": "Instruções de execução"
+      }
     ]
   },
   "demonstracao": {
     "titulo": "Como aparece na conversa",
     "cenario": "Simulação · Feira Vila das Letras (projeto fictício)",
-    "turnos": [{
-      "pedido": "Prepare um comando para diagramar o guia da feira. O texto e a programação já estão aprovados.",
-      "resposta": [
-        {"secao": "Informações adicionais"},
-        {"rotulo": "Ação", "texto": "Diagramar o guia da feira."},
-        {"rotulo": "Resultado esperado", "texto": "PDF A4 com a programação completa, pronto para revisão."},
-        {"rotulo": "Raciocínio recomendado", "texto": "Low (baixo). O conteúdo está aprovado e segue um modelo."},
-        {"secao": "Comando / Briefing"},
-        {"texto": "Use o texto aprovado. Organize as atividades por horário e salve guia-da-feira-v1.pdf na pasta Para revisão."}
-      ]
-    }]
+    "turnos": [
+      {
+        "pedido": "Prepare um comando para diagramar o guia da feira. O texto e a programação já estão aprovados.",
+        "resposta": [
+          {
+            "secao": "Informações adicionais"
+          },
+          {
+            "rotulo": "Ação",
+            "texto": "Diagramar o guia da feira."
+          },
+          {
+            "rotulo": "Resultado esperado",
+            "texto": "PDF A4 com a programação completa, pronto para revisão."
+          },
+          {
+            "rotulo": "Raciocínio recomendado",
+            "texto": "Low (baixo). O conteúdo está aprovado e segue um modelo."
+          },
+          {
+            "secao": "Comando / Briefing"
+          },
+          {
+            "texto": "Use o texto aprovado. Organize as atividades por horário e salve guia-da-feira-v1.pdf na pasta Para revisão."
+          }
+        ]
+      }
+    ]
   },
   "quando_nao_usar": [
     "Ao tirar uma dúvida, como “Qual é a diferença entre A4 e A5?”.",
-    "Quando o próprio assistente vai fazer a tarefa, como resumir um aviso.",
-    "Ao pedir uma opinião sobre o guia, sem preparar uma tarefa para outra pessoa."
+    "Quando o próprio assistente vai fazer a tarefa, como resumir um aviso."
   ],
-  "github": "https://github.com/Jadsonjg/ecosystem-agent-skills/tree/main/skills/delegation-context-skill"
+  "github": "https://github.com/Jadsonjg/ecosystem-agent-skills/tree/main/skills/delegation-context-skill",
+  "orientacao": {
+    "titulo": "O que repassar e quando esperar",
+    "paragrafos": [
+      "As Informações adicionais orientam o Operador sobre a ação, a entrega e o raciocínio. O Comando / Briefing dá ao Executor as instruções para agir.",
+      "Se faltar algo indispensável, como acesso ao texto, esclareça antes de emitir o comando final."
+    ]
+  }
 }

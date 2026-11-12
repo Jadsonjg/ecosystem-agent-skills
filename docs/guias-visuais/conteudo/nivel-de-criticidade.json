@@ -12,9 +12,18 @@
   "adicional": {
     "titulo": "Como escolher o nível",
     "itens": [
-      {"titulo": "1 a 10", "texto": "Escala de rigor da revisão"},
-      {"titulo": "6/10", "texto": "Padrão de entrada se nenhum nível vigente tiver precedência"},
-      {"titulo": "10/10", "texto": "Rigor máximo sob pedido"}
+      {
+        "titulo": "1 a 10",
+        "texto": "Rigor da análise, sem mudar quem decide"
+      },
+      {
+        "titulo": "6/10",
+        "texto": "Padrão de entrada se nenhum nível vigente tiver precedência"
+      },
+      {
+        "titulo": "10/10",
+        "texto": "Testa a decisão. Pode confirmá-la"
+      }
     ]
   },
   "demonstracao": {
@@ -24,17 +33,31 @@
       {
         "pedido": "Revise o plano da oficina. Temos 20 vagas e 15 kits.",
         "resposta": [
-          {"secao": "6/10 · Análise crítica ativa"},
-          {"texto": "Para mudar, diga “criticidade X/10”. Escala: 1–2 baixa contestação · 3–4 colaboração crítica · 5–6 análise ativa · 7–8 contraponto forte · 9–10 teste adversarial.", "nota": true},
-          {"texto": "Confira se haverá reposição antes de divulgar as 20 vagas."}
+          {
+            "secao": "6/10 · Análise crítica ativa"
+          },
+          {
+            "texto": "Para mudar, diga “criticidade X/10”. Escala: 1–2 baixa contestação · 3–4 colaboração crítica · 5–6 análise ativa · 7–8 contraponto forte · 9–10 teste adversarial.",
+            "nota": true
+          },
+          {
+            "texto": "Confira se haverá reposição antes de divulgar as 20 vagas."
+          }
         ]
       },
       {
         "pedido": "Use 10/10 só nesta decisão. Podemos abrir as 20 vagas?",
         "resposta": [
-          {"secao": "10/10 · Rigor máximo nesta decisão"},
-          {"texto": "O padrão 6/10 volta depois. Para mudar, diga “criticidade X/10”. Escala: 1–2 baixa contestação · 3–4 colaboração crítica · 5–6 análise ativa · 7–8 contraponto forte · 9–10 teste adversarial.", "nota": true},
-          {"texto": "Se cada pessoa precisa de um kit, faltam cinco. Abra 15 vagas e use lista de espera até confirmar os kits extras."}
+          {
+            "secao": "10/10 · Rigor máximo nesta decisão"
+          },
+          {
+            "texto": "O padrão 6/10 volta depois. Para mudar, diga “criticidade X/10”. Escala: 1–2 baixa contestação · 3–4 colaboração crítica · 5–6 análise ativa · 7–8 contraponto forte · 9–10 teste adversarial.",
+            "nota": true
+          },
+          {
+            "texto": "Se cada pessoa precisa de um kit, faltam cinco. Sugiro abrir 15 vagas e usar lista de espera até confirmar os kits extras."
+          }
         ]
       }
     ]

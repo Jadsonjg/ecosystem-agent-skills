@@ -1,6 +1,6 @@
 # Padrão Visual da Biblioteca de Skills
 
-**Versão vigente: 1.1.0 · 12/11/2026**
+**Versão vigente: 1.2.0 · 12/11/2026**
 **Escopo:** Guias Rápidos da Biblioteca de Skills do Ecossistema IA & Operações.
 
 Este diretório é a referência oficial para escrever, gerar e conferir novos guias. A especificação da Skill correspondente em `skills/<identificador>/SKILL.md` define seu funcionamento. Este padrão define como apresentá-lo.
@@ -38,6 +38,13 @@ O gerador e o validador aplicam a luminância relativa sRGB da [WCAG 2.2](https:
 
 Todo JSON novo deve registrar uma cor. Para reproduzir arquivos de entrada históricos da v1.0.0 sem essa chave, o gerador usa o verde histórico `#143B36`.
 
+## Densidade e revisão editorial
+
+1. Leia o `SKILL.md` e identifique o **essencial**: finalidade, ocasião de uso, como solicitar, resultado esperado e limites que mudam a conduta do leitor.
+2. Selecione o **complementar de alto valor**: exemplos, distinções ou decisões que tornem o uso mais claro. Deixe detalhes **técnicos ou especializados** na documentação oficial, salvo quando forem indispensáveis à compreensão.
+3. Confira se um leitor leigo consegue interpretar a demonstração e decidir quando a Skill é dispensável. Faça essa revisão mesmo quando a página já parecer bem composta.
+4. Se sobrar muito espaço, revise, nesta ordem: lacunas essenciais, complementos de alto valor, suficiência do exemplo, utilidade de um recurso visual e distribuição dos componentes. Preserve o respiro quando o conteúdo já for suficiente. Não use meta de ocupação, texto repetido ou ampliação artificial de fontes e caixas.
+
 ## Escolha dos componentes
 
 - **Conteúdo adicional:** use o bloco de dois a quatro itens quando o leitor precisar entender uma sequência, escala, regra ou estrutura antes da demonstração. Use itens numerados somente quando a ordem fizer parte do conceito.
@@ -46,6 +53,22 @@ Todo JSON novo deve registrar uma cor. Para reproduzir arquivos de entrada hist�
 - **Economia visual:** mantenha apenas recursos que cumprem uma função diferente. Uma escala pode explicar os níveis, e a conversa pode mostrar como mudar de nível. Dispense ambos quando um caso curto já demonstrar a aplicação.
 - **Paginação:** tente uma página A4. Use duas se a continuação trouxer ganho didático e a síntese tornar o exemplo incompleto. Com `duas_paginas: true`, inclua `demonstracao_inicial` para a primeira parte do caso e `demonstracao` para a continuação. Os cards aparecem apenas na primeira página. A segunda usa cabeçalho compacto, e o encerramento fica no fim. O gerador recusa conteúdo que extrapole a área útil. Mais de duas páginas exige autorização expressa do Operador.
 
+## Recursos visuais
+
+Distinga um gráfico dispensável de um gráfico útil ainda sem suporte. No segundo caso, verifique se um componente simples pode explicar a relação. Reuse o gerador ou consulte os assets do projeto antes de desenhar. Prefira vetores reutilizáveis para relações, sequências e comparações. Para recurso externo, confirme origem, licença, ganho didático e descrição acessível antes da adoção. Os ícones existentes são opcionais e não são necessários à geração.
+
+| Necessidade | Suporte atual |
+| --- | --- |
+| Escala ou comparação simples | `adicional.itens` com títulos e textos curtos |
+| Sequência linear | `adicional.sequencial: true` para numerar |
+| Hierarquia ou relação linear | `adicional.relacao` com legenda obrigatória, de dois a quatro itens e setas vetoriais entre eles |
+| Caso comentado ou conversa | `demonstracao.paragrafos` ou `demonstracao.turnos` |
+| Regra prática após a demonstração | `orientacao` com `titulo` e `paragrafos`, antes de “Quando não usar?” |
+
+O diagrama linear preserva uma lista etiquetada com os rótulos na ordem de leitura. Descreva o sentido e a natureza da relação em `relacao`, sem exigir que o leitor interprete a posição ou a cor. As setas são artefatos porque a legenda e a lista já comunicam a mesma relação. Use frases legíveis e teste a largura dos rótulos. O exemplo reutilizável está no [JSON de Governance](conteudo/agentic-workflow-governance.json).
+
+O gerador cobre os casos acima. Para ramificações, mapas mentais ou figuras cujo significado não possa ser expresso pelo componente linear, avalie uma extensão específica quando houver necessidade. Figuras informativas independentes exigem `Figure` e `Alt` ou representação semântica equivalente devidamente validada. A versão atual recusa imagens rasterizadas no PDF.
+
 ## Produção
 
 Pré-requisitos: Python 3.12, fontes DejaVu Sans e Serif e dependências de [requirements.txt](requirements.txt). Use um ambiente virtual. No Linux, instale o pacote de fontes DejaVu ou informe `SKILLS_FONT_DIR` com o diretório dos três arquivos TTF. O renderizador não depende de serviço externo.
@@ -53,8 +76,8 @@ Pré-requisitos: Python 3.12, fontes DejaVu Sans e Serif e dependências de [req
 ```sh
 cd docs/guias-visuais
 python -m pip install -r requirements.txt
-python gerar.py conteudo/delegation-context-skill.json delegation-context-skill-guia-rapido-padrao-v1.1.0.pdf
-python validar.py conteudo/delegation-context-skill.json delegation-context-skill-guia-rapido-padrao-v1.1.0.pdf
+python gerar.py conteudo/delegation-context-skill.json delegation-context-skill-guia-rapido-padrao-v1.2.0.pdf
+python validar.py conteudo/delegation-context-skill.json delegation-context-skill-guia-rapido-padrao-v1.2.0.pdf
 ```
 
 1. Consulte o catálogo e o `SKILL.md` da versão vigente. Copie um dos exemplos em [conteudo/](conteudo/) e preencha o JSON com a explicação e a demonstração apropriadas.
@@ -68,4 +91,4 @@ O gerador usa PDF 1.7, `pt-BR`, título nos metadados, fontes incorporadas e tex
 
 O template trabalha com texto e vetores. Se um recurso exigir imagem informativa, estenda o gerador para produzir `Figure` com `Alt` e teste a leitura antes de publicar. Se usar tabelas futuramente, implemente cabeçalhos e associações semânticas. O validador atual recusa imagens não previstas. Use PDF/UA (ISO 14289) como referência. A validação implementada cobre os requisitos documentados e não representa certificação formal PDF/UA.
 
-O [relatório da v1.1.0](IMPLEMENTACAO-1.1.0.md) registra as verificações, a aplicação aos três guias e os limites da validação. Consulte o [padrão histórico v1.0.0](https://github.com/Jadsonjg/ecosystem-agent-skills/blob/4b2ba9dff58d5526789c9420b6e6a44474c918fe/docs/guias-visuais/README.md) e seu [relatório](IMPLEMENTACAO.md).
+O [relatório comparativo da v1.2.0](IMPLEMENTACAO-1.2.0.md) registra o diagnóstico, as verificações e os limites da validação. A [v1.1.0](https://github.com/Jadsonjg/ecosystem-agent-skills/blob/8fa4471c3af8bd248b7cbdde758a7951e79711fe/docs/guias-visuais/README.md) e seu [relatório](IMPLEMENTACAO-1.1.0.md) permanecem disponíveis. Consulte o [padrão histórico v1.0.0](https://github.com/Jadsonjg/ecosystem-agent-skills/blob/4b2ba9dff58d5526789c9420b6e6a44474c918fe/docs/guias-visuais/README.md) e seu [relatório](IMPLEMENTACAO.md).
