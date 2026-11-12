@@ -7,7 +7,7 @@ Monorepo público de Skills do ecossistema. Consulte o [guia de contribuição](
 
 | Skill | Versão | Fonte oficial | Compatibilidade | Instalação nativa |
 | --- | --- | --- | --- | --- |
-| <img src="skills/delegation-context-skill/assets/identity/icone.svg" alt="" width="20" height="20"> Delegation Context Skill <sup>(ícone piloto)</sup> | 1.1.0 | [SKILL.md](skills/delegation-context-skill/SKILL.md) | Interface de delegação vigente | [ChatGPT](https://chatgpt.com/skills?skill_id=6acbd243c8088191b2e61b170ec6779c) |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="skills/delegation-context-skill/assets/identity/icone-negativo.svg"><img src="skills/delegation-context-skill/assets/identity/icone.svg" alt="" width="20" height="20"></picture> Delegation Context Skill <sup>(ícone piloto)</sup> | 1.1.0 | [SKILL.md](skills/delegation-context-skill/SKILL.md) | Interface de delegação vigente | [ChatGPT](https://chatgpt.com/skills?skill_id=6acbd243c8088191b2e61b170ec6779c) |
 | Agentic Workflow Governance | 2.0.0 | [Especificação canônica](skills/agentic-workflow-governance/references/especificacao-canonica.md) e [SKILL.md](skills/agentic-workflow-governance/SKILL.md) | Arquitetura de Trabalho Agentiva v2.0 | [ChatGPT](https://chatgpt.com/skills?skill_id=6acbe3f484b48191a13bc6797c8b6bf1) |
 | Nível de Criticidade | 1.1.0 | [Especificação canônica](skills/nivel-de-criticidade/references/especificacao-canonica.md) e [SKILL.md](skills/nivel-de-criticidade/SKILL.md) | Arquitetura de Trabalho Agentiva v2.0; governança 2.0.0 e delegação 1.1.0 | [ChatGPT](https://chatgpt.com/skills?skill_id=6ad15379a0888191a8ff569f84eed566) |
 
