@@ -1,0 +1,14 @@
+interface:
+  display_name: Delegation Context Skill
+  short_description: Delegações claras, calibradas e prontas para execução
+  default_prompt: Use $delegation-context-skill para preparar uma delegação formal
+    com contexto operacional, raciocínio recomendado e briefing executável.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

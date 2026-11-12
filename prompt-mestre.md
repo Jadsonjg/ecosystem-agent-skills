@@ -264,7 +264,7 @@ Se a delegação estiver correta, entregue o briefing pronto para uso.
 
 ## 11. FONTE E ADAPTAÇÃO NATIVA
 
-Manter como fonte oficial o repositório https://github.com/Jadsonjg/delegation-context-skill. Usar `SKILL.md` da raiz como especificação nativa canônica; `prompt-mestre.md` é sua exportação em Markdown para uso em outros chats e deve permanecer equivalente. Consolidar alterações primeiro nessa fonte e registrá-las no histórico de versões antes de atualizar a instalação nativa.
+Manter como fonte oficial o repositório https://github.com/Jadsonjg/ecosystem-agent-skills. Usar `skills/delegation-context-skill/SKILL.md` como especificação nativa canônica; `prompt-mestre.md` é sua exportação em Markdown para uso em outros chats e deve permanecer equivalente. Consolidar alterações primeiro nessa fonte e registrá-las no histórico de versões antes de atualizar a instalação nativa.
 
 Esta versão 1.1.0 incorpora as determinações explícitas do usuário em 11/10/2026: três campos sempre obrigatórios; raciocínio separado do modelo opcional; cinco níveis e sua calibração; retirada da alternativa “Informações adicionais: nenhuma”; critérios de parada e anti-burocracia ampliados conforme esta especificação. A versão inicial 1.0.0 está preservada no histórico do repositório. Não reintroduzir regras antigas conflitantes ao consultar a fonte.
 

@@ -421,7 +421,7 @@ A criticidade existe para melhorar a qualidade das decisões, não para maximiza
 
 ## Fonte, compatibilidade e manutenção
 
-A fonte conceitual e operacional integral está em [especificacao-canonica.md](references/especificacao-canonica.md), convertida da especificação fornecida pelo usuário em 15/10/2026 e atualizada com a revisão de acionamento, persistência e sinalização v1.1.0. Consultá-la em dúvida material, auditoria ou atualização. A fonte versionada oficial é `Jadsonjg/delegation-context-skill`, pasta `skills/nivel-de-criticidade`.
+A fonte conceitual e operacional integral está em [especificacao-canonica.md](references/especificacao-canonica.md), convertida da especificação fornecida pelo usuário em 15/10/2026 e atualizada com a revisão de acionamento, persistência e sinalização v1.1.0. Consultá-la em dúvida material, auditoria ou atualização. A fonte versionada oficial é `Jadsonjg/ecosystem-agent-skills`, pasta `skills/nivel-de-criticidade`.
 
 Respeitar a governança vigente de papéis, autorização, escopo, reversibilidade e risco. Ao preparar delegação formal, consultar a Delegation Context Skill vigente; esta Skill não redefine seu template nem torna o campo Criticidade obrigatório em todas as delegações.
 

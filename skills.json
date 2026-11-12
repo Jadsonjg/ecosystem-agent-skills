@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-15",
-  "source_of_truth": "https://github.com/Jadsonjg/delegation-context-skill",
+  "updated_at": "2026-11-12",
+  "source_of_truth": "https://github.com/Jadsonjg/ecosystem-agent-skills",
   "manager": "Gestor de Skills — este chat, por atribuição explícita do usuário",
   "drive_required": false,
   "skills": [
@@ -9,8 +9,8 @@
       "name": "delegation-context-skill",
       "display_name": "Delegation Context Skill",
       "version": "1.1.0",
-      "native_spec": "SKILL.md",
-      "compatibility_export": "prompt-mestre.md",
+      "native_spec": "skills/delegation-context-skill/SKILL.md",
+      "compatibility_export": "skills/delegation-context-skill/prompt-mestre.md",
       "chatgpt_url": "https://chatgpt.com/skills?skill_id=6acbd243c8088191b2e61b170ec6779c"
     },
     {

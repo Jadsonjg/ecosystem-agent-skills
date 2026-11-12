@@ -1,6 +1,6 @@
 # Instalador curto — Delegation Context Skill
 
-Adote a **Delegation Context Skill** deste repositório. Leia integralmente o `SKILL.md` da raiz antes de aplicá-la. Para importação em um chat, `prompt-mestre.md` contém o mesmo corpo em Markdown.
+Adote a **Delegation Context Skill** deste repositório. Leia integralmente o `skills/delegation-context-skill/SKILL.md` antes de aplicá-la. Para importação em um chat, `prompt-mestre.md` contém o mesmo corpo em Markdown.
 
 Aplicar somente ao preparar delegação formal, comando, briefing ou handoff para outro executor. Não acionar apenas porque existe uma tarefa normal no chat.
 

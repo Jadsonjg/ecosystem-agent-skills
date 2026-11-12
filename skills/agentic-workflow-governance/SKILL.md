@@ -354,7 +354,7 @@ Não deve:
 
 ## Fonte canônica
 
-Manter como fonte oficial versionada o repositório `Jadsonjg/delegation-context-skill`, na pasta `skills/agentic-workflow-governance`.
+Manter como fonte oficial versionada o repositório `Jadsonjg/ecosystem-agent-skills`, na pasta `skills/agentic-workflow-governance`.
 
 Usar `references/especificacao-canonica.md` como fonte de verdade conceitual da Skill. A versão 2.0.0 é compatível com a **Arquitetura de Trabalho Agentiva v2.0** e substitui a lógica 1.x que fundia Coordenador e Gestor em uma única camada.
 

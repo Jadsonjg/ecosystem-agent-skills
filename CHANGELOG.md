@@ -2,6 +2,12 @@
 
 Registrar todas as mudanças relevantes das Skills geridas neste repositório.
 
+## Organização do monorepo — 2026-11-12
+
+- Repositório reorganizado como `ecosystem-agent-skills`. As três Skills têm diretórios próprios e mantêm as versões existentes.
+- Catálogo atualizado e caminhos legados da Delegation Context Skill preservados.
+- Fluxo de criação e validação obrigatória de portabilidade documentados em [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Nível de Criticidade [1.1.0] — 2026-10-15
 
 ### Alterado
